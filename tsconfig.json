@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "rootDir": "./",
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "strict": true,
+    "paths": {
+      "@src": ["src"],
+      "@src/*": ["src/*"],
+      "@models": ["src/@models"],
+      "@models/*": ["src/@models/*"],
+    }
+  }
+}
