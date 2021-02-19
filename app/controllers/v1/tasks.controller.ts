@@ -11,7 +11,8 @@ export class TasksController {
     res.json( await new TasksModule().getTask(id) );
   }
   public async updateTask( req: Request, res: Response) {
-    res.json( await new TasksModule().updateTask() );
+    const task: TasksModels = req.body;
+    res.json( await new TasksModule().updateTask(task) );
   }
   public async deleteTask( req: Request, res: Response) {
     const id: number = parseInt(req.params.id);

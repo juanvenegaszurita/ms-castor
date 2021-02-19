@@ -1,22 +1,8 @@
 import { ReturnServiceMS } from "../../@models/return-service.model";
 import { StatusTasksModels } from "../../@models/status-tasks.models";
 import { TasksModels } from "../../@models/tasks.model";
-import { StatusModel } from "../../@models/status.model";
+import { statusTasks } from "./status-tasks.module";
 
-const status: StatusModel[] = [
-  {
-    idStatus: 1,
-    name: "Por Hacer"
-  },
-  {
-    idStatus: 2,
-    name: "Haciendo"
-  },
-  {
-    idStatus: 3,
-    name: "Finalizado"
-  },
-];
 const tasks: TasksModels[] = [
   {
     idTask: 1,
@@ -103,35 +89,47 @@ const tasks: TasksModels[] = [
 ];
 
 export class TasksModule {
-  public async getAllTask( ) {
-    return { payload: 'Tasks getAllTarea', message: '', code: 200};
+  public async getAllTask( ): Promise<ReturnServiceMS<TasksModels[]>> {
+    return { payload: tasks, message: '', code: "200"};
   }
   public async getTask( id: number ) {
-    return { payload: 'Tasks getTarea'+id, message: '', code: 200};
+    const task: TasksModels | undefined = tasks.find( value => value.idTask === id );
+    return { payload: task, message: '', code: "200"};
   }
-  public async updateTask( ) {
-    return { payload: 'Tasks updateTarea', message: '', code: 200};
+  public async updateTask( task: TasksModels ): Promise<ReturnServiceMS<TasksModels>> {
+    tasks.forEach( (value, index) => {
+      if( value.idTask === task.idTask ) {
+        tasks[index] = task;
+      }
+    });
+    return { payload: task, message: '', code: "200"};
   }
   public async deleteTask( id: number ) {
-    return { payload: 'Tasks deleteTarea'+id, message: '', code: 200};
+    tasks.forEach( (value, index) => {
+      if( value.idTask === id )
+        tasks.splice(index, 1);
+    })
+    return { payload: {}, message: 'Eliminado', code: "200"};
   }
   public async createTask( task: TasksModels ) {
+    task.idTask = tasks.length+1;
     tasks.push(task);
-    return { payload: task, message: '', code: 200};
+    return { payload: task, message: '', code: "200"};
   }
   public async statusTasks( idProject: number ): Promise<ReturnServiceMS<StatusTasksModels[]>> {
-    let statusTasks: StatusTasksModels[] = [];
+    let statusTasksFInal: StatusTasksModels[] = [];
     
-    status.forEach( statu => {
-      console.log(tasks);
+    statusTasks.forEach( statu => {
       const tasksFind: TasksModels[] = tasks.filter( t => t.idStatus === statu.idStatus && t.idProject === idProject );
-      statusTasks.push({
+      statusTasksFInal.push({
         idStatus: statu.idStatus,
         name: statu.name,
+        posicion: statu.posicion,
+        isStateChange: statu.isStateChange,
         tasks: tasksFind
       })
     });
 
-    return { payload: statusTasks, message: '', code: "200"};
+    return { payload: statusTasksFInal, message: '', code: "200"};
   }
 }
