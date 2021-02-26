@@ -12,7 +12,7 @@ export class TasksRouter {
     this.router.delete('/:id', this.tasksController.deleteTask);
     this.router.post('/', this.tasksController.createTask);
     
-    this.router.get('/statusTasks/:idProject', this.tasksController.statusTasks);
+    this.router.get('/group/status', this.tasksController.statusTasks);
 
     return this.router;
   }

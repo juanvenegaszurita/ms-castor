@@ -1,21 +1,24 @@
 import { ReturnServiceMS } from "../../@models/return-service.model";
-import { StatusTasksModels } from "../../@models/status-tasks.models";
+import { StatusTasksModels } from "../../@models/status-tasks.model";
 
 export const statusTasks: StatusTasksModels[] = [
 	{
     idStatus: 1,
+    idEnterprise: 1,
     name: "Por Hacer",
 		posicion: 1,
 		isStateChange: true,
   },
   {
     idStatus: 2,
+    idEnterprise: 1,
     name: "Haciendo",
 		posicion: 2,
 		isStateChange: true,
   },
   {
     idStatus: 3,
+    idEnterprise: 1,
     name: "Finalizado",
 		posicion: 3,
 		isStateChange: false,

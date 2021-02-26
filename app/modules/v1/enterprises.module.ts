@@ -1,3 +1,12 @@
+import { EnterprisesModel } from "../../@models/enterprises.model";
+
+export const enterprises: EnterprisesModel[] = [
+    {
+      idEnterprise: 1,
+      nombre: "Empresa S.A.",
+      descripcion: "La mejor empresa"
+    }
+]
 export class EnterprisesModule {
   public async getAllEnterprise( ) {
     return { payload: 'Enterprises getAllEmpresa', message: '', code: 200};

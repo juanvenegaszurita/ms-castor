@@ -23,7 +23,6 @@ export class TasksController {
     res.json( await new TasksModule().createTask(task) );
   }
   public async statusTasks( req: Request, res: Response) {
-    const idProject: number = parseInt(req.params.idProject);
-    res.json( await new TasksModule().statusTasks(idProject) );
+    res.json( await new TasksModule().statusTasks( req.query ) );
   }
 }

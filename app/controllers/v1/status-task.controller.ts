@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusTasksModule } from '../../modules/v1/status-tasks.module';
-import { StatusTasksModels } from '../../@models/status-tasks.models';
+import { StatusTasksModels } from '../../@models/status-tasks.model';
 
 export class StatustaskController {
   public async getAllStatustask( req: Request, res: Response) {
