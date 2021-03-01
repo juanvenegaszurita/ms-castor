@@ -79,8 +79,8 @@ CREATE TABLE `castor`.`actions` (
 
 INSERT INTO `castor`.`enterprises` (`idEnterprise`, `nombre`, `descripcion`) VALUES ('', 'Empresa S.A.', 'La mejor empresa');
 
-INSERT INTO `castor`.`users` (`UID`, `email`, `nombre`, `cargo`, 'isAdmin') VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2', 'juan.venegas@siigroup.cl', 'Juan Venegas', 'Jefe', 1);
-INSERT INTO `castor`.`users` (`UID`, `email`, `nombre`, `cargo`, 'isAdmin') VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1', 'joseph.venegas02@gmail.com', 'Joseph Venegas', 'Contador', 1);
+INSERT INTO `castor`.`users` (`UID`, `email`, `nombre`, `cargo`, `isAdmin`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2', 'juan.venegas@siigroup.cl', 'Juan Venegas', 'Jefe', 1);
+INSERT INTO `castor`.`users` (`UID`, `email`, `nombre`, `cargo`, `isAdmin`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1', 'joseph.venegas02@gmail.com', 'Joseph Venegas', 'Contador', 1);
 
 INSERT INTO `castor`.`userenterprises` (`UID`, `idEnterprise`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2',1);
 INSERT INTO `castor`.`userenterprises` (`UID`, `idEnterprise`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1',1);
