@@ -83,6 +83,7 @@ INSERT INTO `castor`.`users` (`UID`, `email`, `nombre`, `cargo`, 'isAdmin') VALU
 INSERT INTO `castor`.`users` (`UID`, `email`, `nombre`, `cargo`, 'isAdmin') VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1', 'joseph.venegas02@gmail.com', 'Joseph Venegas', 'Contador', 1);
 
 INSERT INTO `castor`.`userenterprises` (`UID`, `idEnterprise`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2',1);
+INSERT INTO `castor`.`userenterprises` (`UID`, `idEnterprise`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1',1);
 
 INSERT INTO `castor`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Por Hacer', '1', 1, '1');
 INSERT INTO `castor`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Haciendo', '2', 1, '1');
