@@ -1,5 +1,5 @@
 export interface ProjectsModels {
-  idProject: string;
+  idProject?: number;
   idEnterprise: number;
   title: string;
   subtitle: string;

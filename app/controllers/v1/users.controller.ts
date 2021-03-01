@@ -20,7 +20,11 @@ export class UsersController {
   }
   public async createUsers( req: Request, res: Response) {
     const user: UsersModel = req.body;
-    res.json( await new UsersModule().createUsers(user) );
+    const identerprise: number = parseInt(req.headers.identerprise+'');
+    console.log( "req.headers", req.headers )
+    console.log( "req.headers.identerprise", req.headers.identerprise )
+    console.log("identerprise", identerprise)
+    res.json( await new UsersModule().createUsers(user, identerprise) );
   }
   public async getUsersEnterprise( req: Request, res: Response) {
     const id: string = req.params.id;

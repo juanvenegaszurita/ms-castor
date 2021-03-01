@@ -1,11 +1,13 @@
 import express from 'express';
 import { App } from './app/app';
+import { IndexBD } from './app/bd/index.db';
 
 class Server {
   app: express.Application = express();
   PORT = 8000;
 
   constructor() {
+    IndexBD.init();
     this.createServer();
   }
   createServer() {

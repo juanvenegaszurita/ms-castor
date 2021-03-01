@@ -11,7 +11,8 @@ export class StatustaskController {
     res.json( await new StatusTasksModule().getStatustask(id) );
   }
   public async updateStatustask( req: Request, res: Response) {
-    res.json( await new StatusTasksModule().updateStatustask() );
+    const statustask: StatusTasksModels = req.body;
+    res.json( await new StatusTasksModule().updateStatustask(statustask) );
   }
   public async deleteStatustask( req: Request, res: Response) {
     const id: number = parseInt(req.params.id);

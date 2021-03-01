@@ -1,46 +1,32 @@
 import { ReturnServiceMS } from "../../@models/return-service.model";
 import { StatusTasksModels } from "../../@models/status-tasks.model";
-
-export const statusTasks: StatusTasksModels[] = [
-	{
-    idStatus: 1,
-    idEnterprise: 1,
-    name: "Por Hacer",
-		posicion: 1,
-		isStateChange: true,
-  },
-  {
-    idStatus: 2,
-    idEnterprise: 1,
-    name: "Haciendo",
-		posicion: 2,
-		isStateChange: true,
-  },
-  {
-    idStatus: 3,
-    idEnterprise: 1,
-    name: "Finalizado",
-		posicion: 3,
-		isStateChange: false,
-  },
-];
+import { StatusTasks } from "../../bd/status-tasks.bd";
 
 export class StatusTasksModule {
-  public async getAllStatustask( ): Promise<ReturnServiceMS<StatusTasksModels[]>> {
+  public async getAllStatustask( ): Promise<ReturnServiceMS<StatusTasks[]>> {
+    const statusTasks = await StatusTasks.findAll();
     return { payload: statusTasks, message: '', code: "200"};
   }
-  public async getStatustask( id: number ): Promise<ReturnServiceMS<StatusTasksModels | undefined>> {
-		const statusTask: StatusTasksModels | undefined = statusTasks.find( value => value.idStatus === id );
+  public async getStatustask( id: number ): Promise<ReturnServiceMS<StatusTasks | null>> {
+		const statusTask = await StatusTasks.findByPk(id);
     return { payload: statusTask, message: '', code: "200"};
   }
-  public async updateStatustask( ) {
-    return { payload: 'Tasks updateTarea', message: '', code: "200"};
+  public async updateStatustask(statusTask: StatusTasksModels) {
+    const statusTaskUpdate = await StatusTasks.update( statusTask, {where: { idStatus: statusTask.idStatus }} );
+    if( statusTaskUpdate.length > 0 )
+      return { payload: statusTask, message: '', code: "200"};
+    else
+      return { payload: statusTask, message: 'Error al actualziar', code: "200"};
   }
   public async deleteStatustask( id: number ) {
-    return { payload: 'Tasks deleteTarea'+id, message: '', code: "200"};
+    const statusTaskDelete = await StatusTasks.destroy( {where: { idStatus: id }} );
+    if( statusTaskDelete > 0 )
+      return { payload: {}, message: '', code: "200"};
+    else
+      return { payload: {}, message: 'Error al Eliminar', code: "200"};
   }
   public async createStatustask( statusTask: StatusTasksModels ) {
-    statusTasks.push(statusTask);
-    return { payload: statusTasks, message: '', code: "200"};
+    const statusTaskCreate = await StatusTasks.create( statusTask );
+    return { payload: statusTaskCreate, message: '', code: "200"};
   }
 }

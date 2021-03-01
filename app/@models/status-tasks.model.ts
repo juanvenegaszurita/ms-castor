@@ -1,3 +1,4 @@
+import { Tasks } from '../bd/tasks.bd';
 import { TasksModels } from './tasks.model';
 
 export interface StatusTasksModels {
@@ -6,5 +7,5 @@ export interface StatusTasksModels {
   name: string;
   posicion: number;
   isStateChange: boolean;
-  tasks?: TasksModels[];
+  tasks?: Tasks[];
 }

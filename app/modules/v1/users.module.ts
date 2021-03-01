@@ -1,18 +1,8 @@
 import { ReturnServiceMS } from "../../@models/return-service.model";
 import { UsersModel } from "../../@models/users.model";
-import { enterprises } from "./enterprises.module";
+import { UserEnterprise } from "../../bd/user-enterprise.bd";
 import { User } from "../../bd/user.bd";
 
-export const users: UsersModel[] = [
-    {
-      UID: "0Ffuewdnk3fKpsiXO2lOO3s1KdH2",
-      email: "juan.venegas@siigroup.cl",
-      idEnterprise: 1,
-      cargo: "Jefe",
-      enterprise: [],
-      nombre: "Juan Venegas",
-    }
-]
 export class UsersModule {
   public async getAllUsers( ): Promise<ReturnServiceMS<User[]>> {
     const user = await User.findAll();
@@ -36,15 +26,13 @@ export class UsersModule {
     else
       return { payload: {}, message: 'Error al Eliminar', code: "200"};
   }
-  public async createUsers(user: UsersModel) {
+  public async createUsers(user: UsersModel, idEnterprise: number): Promise<ReturnServiceMS<User>> {
     const userCreate = await User.create( user );
+    const userEnterprise = await UserEnterprise.create( { idEnterprise, UID: user.UID } )
     return { payload: userCreate, message: "", code: "200" };
   }
-  public async getUsersEnterprise( id: string ): Promise<ReturnServiceMS<UsersModel | undefined>> {
-    const user: UsersModel | undefined = users.find((value) => value.UID === id);
-    if( user ) {
-      user.enterprise = enterprises.filter( ent => ent.idEnterprise === user.idEnterprise );
-    }
+  public async getUsersEnterprise( id: string ): Promise<ReturnServiceMS<User | null>> {
+    const user = await User.getUsersEnterprise(id);
     return { payload: user, message: "", code: "200" };
   }
 }
