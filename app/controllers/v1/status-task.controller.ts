@@ -4,7 +4,8 @@ import { StatusTasksModels } from '../../@models/status-tasks.model';
 
 export class StatustaskController {
   public async getAllStatustask( req: Request, res: Response) {
-    res.json( await new StatusTasksModule().getAllStatustask() );
+    const identerprise: number = parseInt(req.headers.identerprise+'');
+    res.json( await new StatusTasksModule().getAllStatustask(identerprise) );
   }
   public async getStatustask( req: Request, res: Response) {
     const id: number = parseInt(req.params.id);

@@ -3,8 +3,8 @@ import { StatusTasksModels } from "../../@models/status-tasks.model";
 import { StatusTasks } from "../../bd/status-tasks.bd";
 
 export class StatusTasksModule {
-  public async getAllStatustask( ): Promise<ReturnServiceMS<StatusTasks[]>> {
-    const statusTasks = await StatusTasks.findAll();
+  public async getAllStatustask( identerprise: number ): Promise<ReturnServiceMS<StatusTasks[]>> {
+    const statusTasks = await StatusTasks.findAll({where: {identerprise}});
     return { payload: statusTasks, message: '', code: "200"};
   }
   public async getStatustask( id: number ): Promise<ReturnServiceMS<StatusTasks | null>> {

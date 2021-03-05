@@ -1,6 +1,7 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Op, WhereOptions, JoinTableAttributes } from "sequelize";
 import { sequelize } from "./conexion.bd";
 import { Enterprise } from "./enterprisse.bd";
+import { UserEnterprise } from "./user-enterprise.bd";
 
 export class User extends Model {
   static initModel() {
@@ -9,11 +10,18 @@ export class User extends Model {
         UID: { type: DataTypes.STRING, primaryKey: true},
         email: DataTypes.STRING,
         nombre: DataTypes.STRING,
-        cargo: DataTypes.STRING,
-        isAdmin: DataTypes.BOOLEAN,
       },
       { sequelize, modelName: "users", timestamps: false }
     );
+  }
+  static getAllUsers(idEnterprise: number, UIDNotIn?: string) {
+    const where : WhereOptions<JoinTableAttributes> = ( UIDNotIn ) ? { UID: {[Op.notIn]: [UIDNotIn]} } : {};
+    return this.findAll({
+      where,
+      include: [
+        { model: UserEnterprise, where: {idEnterprise} }
+      ]
+    });
   }
   static getUsersEnterprise(UID: string) {
     return this.findByPk( UID, {
@@ -27,9 +35,7 @@ export class User extends Model {
           exclude: [  "createdAt", "updatedAt" ],
           include: ['idEnterprise', 'nombre', 'descripcion' ]
         },
-        through: {
-          attributes: []
-        },
+        
       }]
     } )
   }

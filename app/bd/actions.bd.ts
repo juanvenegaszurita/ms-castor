@@ -5,7 +5,7 @@ export class Actions extends Model {
   static initModel() {
     this.init(
       {
-        idActions: { type: DataTypes.INTEGER, primaryKey: true },
+        idActions: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
         idTask: DataTypes.INTEGER,
         descriptions: DataTypes.STRING,
         assignedUser: DataTypes.STRING,

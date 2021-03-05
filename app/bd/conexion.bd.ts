@@ -1,11 +1,9 @@
 import { Sequelize } from 'sequelize';
-
 export const sequelize = new Sequelize({
-    host: '127.0.0.1',
-    password: '',
-    username: 'root',
-    port: 3306,
-    database: 'castor',
+    host: process.env.SQL_HOST,
+    password: process.env.SQL_PASSWORD,
+    username: process.env.SQL_USER,
+    database: process.env.SQL_DATABASE,
     dialect: 'mysql',
     define: {
         timestamps: false,

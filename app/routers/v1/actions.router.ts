@@ -9,7 +9,7 @@ export class ActionsRouter {
     this.router.get('/', this.actionsController.getAllActions);
     this.router.get('/:id', this.actionsController.getActions);
     this.router.put('/', this.actionsController.updateActions);
-    this.router.delete('/:id', this.actionsController.deleteActions);
+    this.router.delete('/:id/:idTask', this.actionsController.deleteActions);
     this.router.post('/', this.actionsController.createActions);
     
     return this.router;

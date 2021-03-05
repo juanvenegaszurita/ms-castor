@@ -12,14 +12,18 @@ export class ActionsController {
   }
   public async updateActions( req: Request, res: Response) {
     const action: ActionsModels = req.body;
-    res.json( await new ActionsModule().updateActions(action) );
+    const UID: string = `${req.headers.uid}`;
+    res.json( await new ActionsModule().updateActions(UID, action) );
   }
   public async deleteActions( req: Request, res: Response) {
     const id: number = parseInt(req.params.id);
-    res.json( await new ActionsModule().deleteActions(id) );
+    const idTask: number = parseInt(req.params.idTask);
+    const UID: string = `${req.headers.uid}`;
+    res.json( await new ActionsModule().deleteActions(UID, id, idTask) );
   }
   public async createActions( req: Request, res: Response) {
     const action: ActionsModels = req.body;
-    res.json( await new ActionsModule().createActions(action) );
+    const UID: string = `${req.headers.uid}`;
+    res.json( await new ActionsModule().createActions(UID, action) );
   }
 }

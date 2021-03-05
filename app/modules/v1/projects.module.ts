@@ -3,13 +3,14 @@ import { ReturnServiceMS } from '../../@models/return-service.model'
 import { Project } from '../../bd/projects.bd';
 
 export class ProjectsModule {
-  public async getAllProject( ): Promise<ReturnServiceMS<Project[]>> {
-    const projects = await Project.findAll();
+  public async getAllProject( idEnterprise: number ): Promise<ReturnServiceMS<Project[]>> {
+    const projects = await Project.getProjectCountTasks(idEnterprise);
     return { payload: projects, message: '', code: "200"};
   }
-  public async getProject( id: string ): Promise<ReturnServiceMS<Project | null>> {
-    const project = await Project.findByPk(id);
-    return { payload: project, message: '', code: "200"};
+  public async getProject( idEnterprise: number, idProject: number ): Promise<ReturnServiceMS<Project | null>> {
+    const project = await Project.getProjectCountTasks(idEnterprise, {idProject});
+    const projectFinal = ( project.length > 0 )? project[0] : null;
+    return { payload: projectFinal, message: '', code: "200"};
   }
   public async updateProject( project: ProjectsModels ): Promise<ReturnServiceMS<ProjectsModels>> {
     const finalProject: ProjectsModels = {
@@ -27,8 +28,8 @@ export class ProjectsModule {
     else
       return { payload: finalProject, message: 'Error al actualziar', code: "200"};
   }
-  public async deleteProject( id: string ): Promise<ReturnServiceMS<{}>> {
-    const projectDelete = await Project.destroy( {where: { idProject: id }} );
+  public async deleteProject( idProject: number ): Promise<ReturnServiceMS<{}>> {
+    const projectDelete = await Project.destroy( {where: { idProject }} );
     if( projectDelete > 0 )
       return { payload: {}, message: '', code: "200"};
     else

@@ -1,4 +1,5 @@
 import { ActionsModels } from "./actions.model";
+import { HistoryTaskModel } from "./history-task.model";
 
 export interface TasksModels {
   idTask: number;
@@ -8,5 +9,7 @@ export interface TasksModels {
   assignedUser: string;
   idStatus: number;
   CREATE_DATE?: Date;
+  isDelete?: boolean;
   actions: ActionsModels[];
+  historytasks?: HistoryTaskModel[];
 }

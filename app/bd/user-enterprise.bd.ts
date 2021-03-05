@@ -7,6 +7,9 @@ export class UserEnterprise extends Model {
       {
         UID: { type: DataTypes.STRING, primaryKey: true},
         idEnterprise: { type: DataTypes.INTEGER, primaryKey: true},
+        isAdmin: DataTypes.BOOLEAN,
+        cargo: DataTypes.STRING,
+        status: DataTypes.BOOLEAN,
       },
       { sequelize, modelName: "userenterprises", timestamps: false }
     )

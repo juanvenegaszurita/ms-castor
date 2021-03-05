@@ -5,4 +5,5 @@ export interface ProjectsModels {
   subtitle: string;
   descriptions: string;
   avatar?: string;
+  countTasks?: number;
 }
