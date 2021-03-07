@@ -4,7 +4,6 @@ import { IndexBD } from './app/bd/index.db';
 
 class Server {
   app: express.Application = express();
-  PORT = 8000;
 
   constructor() {
     IndexBD.init();
@@ -12,7 +11,7 @@ class Server {
   }
   createServer() {
     this.app.use( App.getApp() );
-    this.app.listen(this.PORT, () => {
+    this.app.listen(process.env.PORT, () => {
       console.log(`⚡️[server]: Server is running at https://localhost:${this.PORT}`);
     });
   }
