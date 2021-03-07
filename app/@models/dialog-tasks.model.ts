@@ -1,8 +1,8 @@
-import { tasksModels } from './tasks.model';
+import { TasksModels } from './tasks.model';
 
 export interface DialogTasksModels {
   type: typeDialog;
-  task?: tasksModels;
+  task?: TasksModels;
 }
 type typeDialog = 'VIEW' | 'EDIT' | 'NEW' | 'DELETE';
 
