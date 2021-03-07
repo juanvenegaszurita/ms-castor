@@ -12,7 +12,7 @@ class Server {
   createServer() {
     this.app.use( App.getApp() );
     this.app.listen(process.env.PORT, () => {
-      console.log(`⚡️[server]: Server is running at https://localhost:${this.PORT}`);
+      console.log(`⚡️[server]: Server is running at https://localhost:${process.env.PORT}`);
     });
   }
 }

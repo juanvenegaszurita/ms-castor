@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sequelize = void 0;
 const sequelize_1 = require("sequelize");
-console.log("process.env", process.env);
 exports.sequelize = new sequelize_1.Sequelize({
     host: process.env.SQL_HOST,
     password: process.env.SQL_PASSWORD,

@@ -9,14 +9,13 @@ const index_db_1 = require("./app/bd/index.db");
 class Server {
     constructor() {
         this.app = express_1.default();
-        this.PORT = 8000;
         index_db_1.IndexBD.init();
         this.createServer();
     }
     createServer() {
         this.app.use(app_1.App.getApp());
-        this.app.listen(this.PORT, () => {
-            console.log(`⚡️[server]: Server is running at https://localhost:${this.PORT}`);
+        this.app.listen(process.env.PORT, () => {
+            console.log(`⚡️[server]: Server is running at https://localhost:${process.env.PORT}`);
         });
     }
 }
