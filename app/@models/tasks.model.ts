@@ -12,4 +12,5 @@ export interface TasksModels {
   isDelete?: boolean;
   actions: ActionsModels[];
   historytasks?: HistoryTaskModel[];
+  color?: string;
 }

@@ -1,3 +1,4 @@
+import { TasksModels } from "app/@models/tasks.model";
 import { Model, DataTypes, Includeable } from "sequelize";
 import { StatusTasksModels } from "../@models/status-tasks.model";
 import { Actions } from "./actions.bd";
@@ -65,7 +66,18 @@ export class Tasks extends Model {
           ]
         }
       );
-      const tasks = ( project.length > 0 )? project[0].getDataValue('tasks') : [];
+      const tasks: Tasks[] = [];
+      if( project.length > 0 ) {
+        project.forEach( pro => {
+          const ta = pro.getDataValue('tasks') as Tasks[];
+          if( ta && ta.length > 0 ) {
+            ta.forEach(t => {
+              t.setDataValue( "color", pro.getDataValue('avatar') );
+              tasks.push(t);
+            });
+          }
+        });
+      }
 
       statusTasksFInal.push({
         idStatus: statu.getDataValue('idStatus'),
