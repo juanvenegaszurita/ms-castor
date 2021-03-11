@@ -50,7 +50,6 @@ export class ReportModule {
               const historytasks = task.getDataValue('historytasks') as HistoryTasks[];
               historytasks.forEach( HT => {
                 const createDate = new Date(HT.getDataValue("CREATE_DATE"));
-                console.log("createDate", createDate);
                 if( !isNaN(createDate.getTime()) ) {
                   if( fechaAnterior === null ) {
                     fechaAnterior = createDate;
@@ -58,7 +57,6 @@ export class ReportModule {
                     tiempo = createDate.getTime() - fechaAnterior.getTime();
                   }
                 }
-                console.log("tiempo 1", tiempo);
               })
               let calculo: number = 1;
               switch (typeValue) {
@@ -68,7 +66,6 @@ export class ReportModule {
                 case 'days': calculo = (1000 * 60 * 60 * 24); break;
               }
               const final = tiempo === 0? tiempo : Math.round(tiempo/calculo);
-              console.log("final", final, "  =  "+user.getDataValue('nombre'));
 
               const createDatetask = new Date(task.getDataValue('CREATE_DATE'));
               if( !isNaN(createDatetask.getTime()) )
