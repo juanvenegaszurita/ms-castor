@@ -22,21 +22,23 @@ export class IndexBD {
     });
     User.hasMany( UserEnterprise, {foreignKey: 'UID'});
     User.hasMany( HistoryTasks, {foreignKey: 'UID'});
+    User.hasMany( Tasks, {foreignKey: 'assignedUser'}); 
 
     Project.hasOne( Enterprise, {foreignKey: 'idEnterprise'});
     Project.hasMany( Tasks, { foreignKey: 'idProject' });
 
-    StatusTasks.hasOne( Enterprise, {foreignKey: 'idEnterprise'});
-
     Tasks.hasOne( Enterprise, {foreignKey: 'idEnterprise'});
     Tasks.hasOne( Project, {foreignKey: 'idProject'});
     Tasks.hasOne( User, {foreignKey: 'UID'});
-    Tasks.hasOne( StatusTasks, {foreignKey: 'idStatus'});
+    Tasks.belongsTo( StatusTasks, {foreignKey: 'idStatus'});
     Tasks.hasMany( Actions, {foreignKey: 'idTask'} )
     Tasks.hasMany( HistoryTasks, {foreignKey: 'idTask'} )
 
+    StatusTasks.hasOne( Enterprise, {foreignKey: 'idEnterprise'});
+    
     HistoryTasks.belongsTo( User, {foreignKey: 'UID'});
     HistoryTasks.belongsTo( Tasks, {foreignKey: 'idTask'});
     Actions.belongsTo( Tasks, { foreignKey: 'idTask' });
+    Enterprise.hasMany( Project, {foreignKey: 'idEnterprise'} );
   }
 }

@@ -35,8 +35,8 @@ export class TasksModule {
     HistoryTasks.createTask(UID, task);
     return { payload: taskCreate, message: "", code: "200" };
   }
-  public async statusTasks( identerprise: number, query: {idProject?: number}, isAdmin: boolean ): Promise<ReturnServiceMS<any>> {
-    const statusTasksFInal = await Tasks.statusTasks(identerprise, query, isAdmin);
+  public async statusTasks( identerprise: number, query: {idProject?: number}, isAdmin: boolean, UID: string ): Promise<ReturnServiceMS<any>> {
+    const statusTasksFInal = await Tasks.statusTasks(identerprise, query, isAdmin, UID);
     return { payload: statusTasksFInal, message: '', code: "200"};
   }
 }

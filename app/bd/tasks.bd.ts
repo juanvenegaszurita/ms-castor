@@ -32,7 +32,7 @@ export class Tasks extends Model {
   static getTask( id: number, idEnterprise: number ) {
     return this.findOne( { where: { idTask: id, isDelete: false } } );
   }
-  static async statusTasks( idEnterprise: number, query: {idProject?: number, assignedUser?: string}, isAdmin: boolean ) {
+  static async statusTasks( idEnterprise: number, query: {idProject?: number, assignedUser?: string}, isAdmin: boolean, UID: string ) {
     let statusTasksFInal: StatusTasksModels[] = [];
     const status = await StatusTasks.findAll({where: {idEnterprise}});
     
@@ -42,7 +42,12 @@ export class Tasks extends Model {
         isDelete: false
       };
       if( query?.idProject ) where.idProject = query.idProject;
-      if( query?.assignedUser ) where.assignedUser = query.assignedUser;
+      if(isAdmin) {
+        if( query?.assignedUser )
+          where.assignedUser = query.assignedUser;
+      } else {
+        where.assignedUser = UID;
+      }
       const include: Includeable[] = ( isAdmin ) ?
         [
           {model: Actions, as: 'actions'},

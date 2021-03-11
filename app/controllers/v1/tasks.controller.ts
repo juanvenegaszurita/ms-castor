@@ -28,8 +28,9 @@ export class TasksController {
     res.json( await new TasksModule().createTask(UID, task) );
   }
   public async statusTasks( req: Request, res: Response) {
-    const isAdmin: boolean = Boolean(req.headers.isadmin);
+    const isAdmin: boolean = req.headers.isadmin === 'true';
     const identerprise: number = parseInt(req.headers.identerprise+'');
-    res.json( await new TasksModule().statusTasks( identerprise, req.query, isAdmin ) );
+    const UID: string = `${req.headers.uid}`;
+    res.json( await new TasksModule().statusTasks( identerprise, req.query, isAdmin, UID ) );
   }
 }
