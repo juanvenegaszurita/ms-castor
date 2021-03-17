@@ -51,6 +51,7 @@ export class User extends Model {
     const include: Includeable[] = includeActions ? 
     [
       { model: Tasks, where: {
+        isDelete: false,
         ...paramWhere,
         whereLiteral,
         whereAnio
@@ -61,6 +62,7 @@ export class User extends Model {
     ] :
     [
       { model: Tasks, where: {
+        isDelete: false,
         ...paramWhere,
         whereLiteral,
         whereAnio
