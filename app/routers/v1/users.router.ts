@@ -10,6 +10,7 @@ export class UsersRouter {
     this.router.get('/:id', this.usersController.getUsers);
     this.router.put('/', this.usersController.updateUsers);
     this.router.put('/status', this.usersController.updateStatusUsers);
+    this.router.put('/onlyUser', this.usersController.updateOnlyUser);
     this.router.delete('/:id', this.usersController.deleteUsers);
     this.router.post('/', this.usersController.createUsers);
     this.router.post('/ExistingUser', this.usersController.createExistingUser);

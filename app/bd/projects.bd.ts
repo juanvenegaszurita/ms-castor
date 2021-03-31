@@ -28,7 +28,9 @@ export class Project extends Model {
       },
       include: {
         model: Tasks,
-        attributes: []
+        where: { isDelete: false },
+        attributes: [],
+        required:false,
       },
       group: ['projects.idProject']
     })

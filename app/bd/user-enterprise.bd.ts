@@ -10,6 +10,7 @@ export class UserEnterprise extends Model {
         isAdmin: DataTypes.BOOLEAN,
         cargo: DataTypes.STRING,
         status: DataTypes.BOOLEAN,
+        boss: DataTypes.STRING,
       },
       { sequelize, modelName: "userenterprises", timestamps: false }
     )

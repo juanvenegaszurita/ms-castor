@@ -3,6 +3,7 @@ import express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import cors from  "cors";
 import helmet from "helmet";
+import bodyParser from "body-parser";
 
 export class App {
   private static app = express();
@@ -17,6 +18,9 @@ export class App {
     this.app.use(this.errorHandler);
     this.app.use( Routers.getRouters() );
     this.app.use(`*`, this.pathError);
+
+    this.app.set("view engine", "ejs");
+    this.app.use(bodyParser.urlencoded({ extended: true }));
     return this.app;
   }
   private static initCors(req: Request, res: Response, next: NextFunction) {

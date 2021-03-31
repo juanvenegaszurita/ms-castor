@@ -7,6 +7,8 @@ import { StatustaskRouter } from './status-task.router';
 import { ActionsRouter } from './actions.router';
 import { ReportRouter } from './report.router';
 
+import { TransbankRouter } from './transbank/transbank.router';
+
 export class RouterV1 {
   private static router: Router = Router();
 
@@ -18,6 +20,9 @@ export class RouterV1 {
     this.router.use('/statusTask', StatustaskRouter.getRouter());
     this.router.use('/actions', ActionsRouter.getRouter());
     this.router.use('/report', ReportRouter.getRouter());
+
+    this.router.use('/transbank', TransbankRouter.getRouter());
+
     return this.router;
   }
 }

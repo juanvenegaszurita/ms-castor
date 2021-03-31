@@ -17,6 +17,11 @@ export class UsersController {
     const identerprise: number = parseInt(req.headers.identerprise+'');
     res.json( await new UsersModule().updateUsers(user, identerprise) );
   }
+  public async updateOnlyUser( req: Request, res: Response) {
+    const UID: string = `${req.headers.uid}`;
+    const user: UsersModel = req.body;
+    res.json( await new UsersModule().updateOnlyUser(user, UID) );
+  }
   public async updateStatusUsers( req: Request, res: Response) {
     const dataStatus: {UID: string, status: boolean} = req.body;
     const identerprise: number = parseInt(req.headers.identerprise+'');

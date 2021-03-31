@@ -8,6 +8,7 @@ export class Enterprise extends Model {
         idEnterprise: { type: DataTypes.INTEGER, primaryKey: true},
         nombre: DataTypes.STRING,
         descripcion: DataTypes.STRING,
+        isFree: DataTypes.BOOLEAN,
       },
       { sequelize, modelName: "enterprises", timestamps: false }
     );

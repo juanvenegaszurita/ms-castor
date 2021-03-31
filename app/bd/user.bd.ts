@@ -15,16 +15,24 @@ export class User extends Model {
         UID: { type: DataTypes.STRING, primaryKey: true},
         email: DataTypes.STRING,
         nombre: DataTypes.STRING,
+        cumpleanos: DataTypes.DATE,
       },
       { sequelize, modelName: "users", timestamps: false }
     );
+  }
+  static getFullUser(idEnterprise: number, UID: string) {
+    return this.findByPk(UID, {
+      include: [
+        { model: UserEnterprise, where: {idEnterprise}, include: [ {model: this, as: 'userBoss'} ]},
+      ]
+    });
   }
   static getAllUsers(idEnterprise: number, UIDNotIn?: string) {
     const where : WhereOptions<JoinTableAttributes> = ( UIDNotIn ) ? { UID: {[Op.notIn]: [UIDNotIn]} } : {};
     return this.findAll({
       where,
       include: [
-        { model: UserEnterprise, where: {idEnterprise} }
+        { model: UserEnterprise, where: {idEnterprise}, include: [ {model: this, as: 'userBoss'} ]},
       ]
     });
   }

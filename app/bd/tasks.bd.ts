@@ -1,4 +1,3 @@
-import { TasksModels } from "app/@models/tasks.model";
 import { Model, DataTypes, Includeable } from "sequelize";
 import { StatusTasksModels } from "../@models/status-tasks.model";
 import { Actions } from "./actions.bd";

@@ -13,15 +13,24 @@ export class UsersModule {
     const user = await User.findByPk(id);
     return { payload: user, message: "", code: "200" };
   }
-  public async updateUsers(user: UsersModel, idEnterprise: number): Promise<ReturnServiceMS<UsersModel>> {
+  public async updateUsers(user: UsersModel, idEnterprise: number): Promise<ReturnServiceMS<UsersModel | User | null>> {
     const userenterprises = (user?.userenterprises && user.userenterprises.length > 0) ? user.userenterprises[0]: {};
     const userUpdate = await User.update( user, {where: { UID: user.UID }} );
     const userEnterprise = await UserEnterprise.update( userenterprises, { where: { UID: user.UID, idEnterprise } } );
-    
-    if( userUpdate.length > 0 && userEnterprise.length > 0 )
-      return { payload: user, message: '', code: "200"};
-    else
+
+    if( userUpdate.length > 0 && userEnterprise.length > 0 ) {
+      const finalUser = await User.getFullUser(idEnterprise, user.UID);
+      return { payload: finalUser, message: '', code: "200"};
+    } else
       return { payload: user, message: 'Error al actualziar', code: "200"};
+  }
+  public async updateOnlyUser(user: UsersModel, UID: string): Promise<ReturnServiceMS<UsersModel>> {
+    const userUpdate = await User.update( user, {where: { UID }} );
+    if( userUpdate.length > 0 ) {
+      return { payload: user, message: '', code: "200"};
+    } else {
+      return { payload: user, message: 'Error al actualziar', code: "200"};
+    }
   }
   public async updateStatusUsers(data: {UID: string, status: boolean}, idEnterprise: number): Promise<ReturnServiceMS<{UID: string, status: boolean}>> {
     const userEnterprise = await UserEnterprise.update( { status: data.status }, { where: { UID: data.UID, idEnterprise } } );
@@ -38,19 +47,21 @@ export class UsersModule {
     else
       return { payload: {}, message: 'Error al Eliminar', code: "200"};
   }
-  public async createUsers(user: UsersModel, idEnterprise: number): Promise<ReturnServiceMS<User>> {
+  public async createUsers(user: UsersModel, idEnterprise: number): Promise<ReturnServiceMS<User | null>> {
     const userenterprises : UserEnterprisesModel | null = (user?.userenterprises && user.userenterprises.length > 0) ? user.userenterprises[0]: null;
     const userCreate = await User.create( user );
-    const userEnterprise = await UserEnterprise.create( { idEnterprise, UID: user.UID, isAdmin: userenterprises?.isAdmin, cargo: userenterprises?.cargo, status: userenterprises?.status } );
-    userCreate.setDataValue("userenterprises", [userEnterprise]);
-    return { payload: userCreate, message: "", code: "200" };
+    const userEnterprise = await UserEnterprise.create( { idEnterprise, UID: user.UID, isAdmin: userenterprises?.isAdmin, cargo: userenterprises?.cargo, status: userenterprises?.status, boss: userenterprises?.boss } );
+    
+    const finalUser = await User.getFullUser(idEnterprise, user.UID);
+
+    return { payload: finalUser, message: "", code: "200" };
   }
   public async createExistingUser(user: UsersModel, idEnterprise: number): Promise<ReturnServiceMS<User | null>> {
     const userenterprises : UserEnterprisesModel | null = (user?.userenterprises && user.userenterprises.length > 0) ? user.userenterprises[0]: null;
     const existingUser = await User.findOne({ where: {email: user.email} });
     if( existingUser ) {
       user.UID = existingUser.getDataValue("UID");
-      const userEnterprise = await UserEnterprise.create( { idEnterprise, UID: user.UID, isAdmin: userenterprises?.isAdmin, cargo: userenterprises?.cargo, status: userenterprises?.status } );
+      const userEnterprise = await UserEnterprise.create( { idEnterprise, UID: user.UID, isAdmin: userenterprises?.isAdmin, cargo: userenterprises?.cargo, status: true } );
       existingUser.setDataValue("userenterprises", [userEnterprise]);
       return { payload: existingUser, message: "", code: "200" };
     } else {
