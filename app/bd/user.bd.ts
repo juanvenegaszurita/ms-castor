@@ -1,6 +1,7 @@
 import { Model, DataTypes, Op, WhereOptions, JoinTableAttributes, literal, where, fn, col, Includeable } from "sequelize";
 import { Literal, Where } from "sequelize/types/lib/utils";
 import { sequelize } from "./conexion.bd";
+import { EnterprisesPlans } from "./enterprises-plans.bd";
 import { Enterprise } from "./enterprisse.bd";
 import { HistoryTasks } from "./history-task.bd";
 import { Project } from "./projects.bd";
@@ -37,6 +38,7 @@ export class User extends Model {
     });
   }
   static getUsersEnterprise(UID: string) {
+    const now = new Date();
     return this.findByPk( UID, {
       attributes: {
         exclude: [ "createdAt", "updatedAt" ]
@@ -48,7 +50,9 @@ export class User extends Model {
           exclude: [  "createdAt", "updatedAt" ],
           include: ['idEnterprise', 'nombre', 'descripcion' ]
         },
-        
+        include: [
+          { model: EnterprisesPlans, where: {anio: now.getFullYear(), mes: (now.getMonth()+1)}, required: false }
+        ]
       }]
     } )
   }

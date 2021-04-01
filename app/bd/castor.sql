@@ -1,14 +1,14 @@
 drop database heroku_6152d05fd720d66;
 create database heroku_6152d05fd720d66;
 
-CREATE TABLE `heroku_6152d05fd720d66`.`enterprises` (
+CREATE TABLE `enterprises` (
   `idEnterprise` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idEnterprise`)
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`projects` (
+CREATE TABLE `projects` (
   `idProject` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `subtitle` varchar(100) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE `heroku_6152d05fd720d66`.`projects` (
   CONSTRAINT `fk_idEnterprise_projects` FOREIGN KEY (`idEnterprise`) REFERENCES `enterprises` (`idEnterprise`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`statustasks` (
+CREATE TABLE `statustasks` (
   `idStatus` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `posicion` int(11) NOT NULL,
@@ -31,14 +31,14 @@ CREATE TABLE `heroku_6152d05fd720d66`.`statustasks` (
   CONSTRAINT `fk_idEnterprise_statustasks` FOREIGN KEY (`idEnterprise`) REFERENCES `enterprises` (`idEnterprise`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`users` (
+CREATE TABLE `users` (
   `UID` varchar(100) NOT NULL,
   `email` varchar(45) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`UID`)
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`tasks` (
+CREATE TABLE `tasks` (
   `idTask` int(11) NOT NULL AUTO_INCREMENT,
   `idProject` int(11) DEFAULT NULL,
   `title` varchar(50) DEFAULT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE `heroku_6152d05fd720d66`.`tasks` (
 );
 
 
-CREATE TABLE `heroku_6152d05fd720d66`.`userenterprises` (
+CREATE TABLE `userenterprises` (
   `UID` varchar(100) NOT NULL,
   `idEnterprise` int NOT NULL,
   `isAdmin` TINYINT NULL DEFAULT 0,
@@ -69,7 +69,7 @@ CREATE TABLE `heroku_6152d05fd720d66`.`userenterprises` (
   CONSTRAINT `fk_idEnterprise_userenterprises` FOREIGN KEY (`idEnterprise`) REFERENCES `enterprises` (`idEnterprise`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`actions` (
+CREATE TABLE `actions` (
   `idActions` INT NOT NULL AUTO_INCREMENT,
   `idTask` INT NULL,
   `descriptions` VARCHAR(500) NULL,
@@ -77,10 +77,10 @@ CREATE TABLE `heroku_6152d05fd720d66`.`actions` (
   `CREATE_DATE` DATETIME NULL DEFAULT current_timestamp,
   `editable` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`idActions`),
-  CONSTRAINT `fk_idTask_actions` FOREIGN KEY (`idTask`) REFERENCES `heroku_6152d05fd720d66`.`tasks` (`idTask`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_idTask_actions` FOREIGN KEY (`idTask`) REFERENCES `tasks` (`idTask`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`historytasks` (
+CREATE TABLE `historytasks` (
   `idHistoryTask` int(11) NOT NULL AUTO_INCREMENT,
   `nameTable` varchar(45) NOT NULL,
   `descriptions` varchar(500) NOT NULL,
@@ -94,24 +94,24 @@ CREATE TABLE `heroku_6152d05fd720d66`.`historytasks` (
   CONSTRAINT `fk_historytask_idTask` FOREIGN KEY (`idTask`) REFERENCES `tasks` (`idTask`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-INSERT INTO `heroku_6152d05fd720d66`.`enterprises` (`idEnterprise`, `nombre`, `descripcion`) VALUES ('', 'Empresa S.A.', 'La mejor empresa');
-INSERT INTO `heroku_6152d05fd720d66`.`enterprises` (`idEnterprise`, `nombre`, `descripcion`) VALUES ('', 'Wede S.A.', 'Wede');
+INSERT INTO `enterprises` (`idEnterprise`, `nombre`, `descripcion`) VALUES ('', 'Empresa S.A.', 'La mejor empresa');
+INSERT INTO `enterprises` (`idEnterprise`, `nombre`, `descripcion`) VALUES ('', 'Wede S.A.', 'Wede');
 
-INSERT INTO `heroku_6152d05fd720d66`.`users` (`UID`, `email`, `nombre`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2', 'juan.venegas@siigroup.cl', 'Juan Venegas');
-INSERT INTO `heroku_6152d05fd720d66`.`users` (`UID`, `email`, `nombre`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1', 'joseph.venegas02@gmail.com', 'Joseph Venegas');
+INSERT INTO `users` (`UID`, `email`, `nombre`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2', 'juan.venegas@siigroup.cl', 'Juan Venegas');
+INSERT INTO `users` (`UID`, `email`, `nombre`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1', 'joseph.venegas02@gmail.com', 'Joseph Venegas');
 
-INSERT INTO `heroku_6152d05fd720d66`.`userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2',1, 1, 'Jefe');
-INSERT INTO `heroku_6152d05fd720d66`.`userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2',2, 1, 'Contador');
-INSERT INTO `heroku_6152d05fd720d66`.`userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1',1, 1, 'Contador');
+INSERT INTO `userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2',1, 1, 'Jefe');
+INSERT INTO `userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2',2, 1, 'Contador');
+INSERT INTO `userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1',1, 1, 'Contador');
 
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Pendiente', '1', 1, '1');
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Proceso', '2', 1, '1');
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Finalizado', '3', 0, '1');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Pendiente', '1', 1, '1');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Proceso', '2', 1, '1');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Finalizado', '3', 0, '1');
 
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Pendiente', '1', 1, '2');
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Proceso', '2', 1, '2');
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Finalizado', '3', 0, '2');
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Rechazado', '4', 0, '2');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Pendiente', '1', 1, '2');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Proceso', '2', 1, '2');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Finalizado', '3', 0, '2');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Rechazado', '4', 0, '2');
 
 
 
@@ -135,14 +135,14 @@ INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isState
 
 
 /* ******* */
-CREATE TABLE `heroku_6152d05fd720d66`.`enterprises` (
+CREATE TABLE `enterprises` (
   `idEnterprise` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idEnterprise`)
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`projects` (
+CREATE TABLE `projects` (
   `idProject` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `subtitle` varchar(100) NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE `heroku_6152d05fd720d66`.`projects` (
   CONSTRAINT `fk_idEnterprise_projects` FOREIGN KEY (`idEnterprise`) REFERENCES `enterprises` (`idEnterprise`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`statustasks` (
+CREATE TABLE `statustasks` (
   `idStatus` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `posicion` int(11) NOT NULL,
@@ -165,14 +165,14 @@ CREATE TABLE `heroku_6152d05fd720d66`.`statustasks` (
   CONSTRAINT `fk_idEnterprise_statustasks` FOREIGN KEY (`idEnterprise`) REFERENCES `enterprises` (`idEnterprise`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`users` (
+CREATE TABLE `users` (
   `UID` varchar(100) NOT NULL,
   `email` varchar(45) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`UID`)
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`tasks` (
+CREATE TABLE `tasks` (
   `idTask` int(11) NOT NULL AUTO_INCREMENT,
   `idProject` int(11) DEFAULT NULL,
   `title` varchar(50) DEFAULT NULL,
@@ -191,7 +191,7 @@ CREATE TABLE `heroku_6152d05fd720d66`.`tasks` (
 );
 
 
-CREATE TABLE `heroku_6152d05fd720d66`.`userenterprises` (
+CREATE TABLE `userenterprises` (
   `UID` varchar(100) NOT NULL,
   `idEnterprise` int NOT NULL,
   `isAdmin` TINYINT NULL DEFAULT 0,
@@ -203,7 +203,7 @@ CREATE TABLE `heroku_6152d05fd720d66`.`userenterprises` (
   CONSTRAINT `fk_idEnterprise_userenterprises` FOREIGN KEY (`idEnterprise`) REFERENCES `enterprises` (`idEnterprise`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`actions` (
+CREATE TABLE `actions` (
   `idActions` INT NOT NULL AUTO_INCREMENT,
   `idTask` INT NULL,
   `descriptions` VARCHAR(500) NULL,
@@ -211,10 +211,10 @@ CREATE TABLE `heroku_6152d05fd720d66`.`actions` (
   `CREATE_DATE` DATETIME NULL DEFAULT current_timestamp,
   `editable` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`idActions`),
-  CONSTRAINT `fk_idTask_actions` FOREIGN KEY (`idTask`) REFERENCES `heroku_6152d05fd720d66`.`tasks` (`idTask`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_idTask_actions` FOREIGN KEY (`idTask`) REFERENCES `tasks` (`idTask`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE `heroku_6152d05fd720d66`.`historytasks` (
+CREATE TABLE `historytasks` (
   `idHistoryTask` int(11) NOT NULL AUTO_INCREMENT,
   `nameTable` varchar(45) NOT NULL,
   `descriptions` varchar(500) NOT NULL,
@@ -228,21 +228,27 @@ CREATE TABLE `heroku_6152d05fd720d66`.`historytasks` (
   CONSTRAINT `fk_historytask_idTask` FOREIGN KEY (`idTask`) REFERENCES `tasks` (`idTask`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-INSERT INTO `heroku_6152d05fd720d66`.`enterprises` (`idEnterprise`, `nombre`, `descripcion`) VALUES ('', 'Empresa S.A.', 'La mejor empresa');
-INSERT INTO `heroku_6152d05fd720d66`.`enterprises` (`idEnterprise`, `nombre`, `descripcion`) VALUES ('', 'Wede S.A.', 'Wede');
+INSERT INTO `enterprises` (`idEnterprise`, `nombre`, `descripcion`) VALUES ('', 'Empresa S.A.', 'La mejor empresa');
+INSERT INTO `enterprises` (`idEnterprise`, `nombre`, `descripcion`) VALUES ('', 'Wede S.A.', 'Wede');
 
-INSERT INTO `heroku_6152d05fd720d66`.`users` (`UID`, `email`, `nombre`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2', 'juan.venegas@siigroup.cl', 'Juan Venegas');
-INSERT INTO `heroku_6152d05fd720d66`.`users` (`UID`, `email`, `nombre`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1', 'joseph.venegas02@gmail.com', 'Joseph Venegas');
+INSERT INTO `users` (`UID`, `email`, `nombre`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2', 'juan.venegas@siigroup.cl', 'Juan Venegas');
+INSERT INTO `users` (`UID`, `email`, `nombre`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1', 'joseph.venegas02@gmail.com', 'Joseph Venegas');
 
-INSERT INTO `heroku_6152d05fd720d66`.`userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2',4, 1, 'Jefe');
-INSERT INTO `heroku_6152d05fd720d66`.`userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2',14, 1, 'Contador');
-INSERT INTO `heroku_6152d05fd720d66`.`userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1',4, 1, 'Contador');
+INSERT INTO `userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2',4, 1, 'Jefe');
+INSERT INTO `userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('0Ffuewdnk3fKpsiXO2lOO3s1KdH2',14, 1, 'Contador');
+INSERT INTO `userenterprises` (`UID`, `idEnterprise`, `isAdmin`, `cargo`) VALUES ('sxwOjVS191flw4yK4TLV7OgprZs1',4, 1, 'Contador');
 
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Pendiente', '1', 1, '4');
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Proceso', '2', 1, '4');
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Finalizado', '3', 0, '4');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Pendiente', '1', 1, '4');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Proceso', '2', 1, '4');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Finalizado', '3', 0, '4');
 
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Pendiente', '1', 1, '14');
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Proceso', '2', 1, '14');
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Finalizado', '3', 0, '14');
-INSERT INTO `heroku_6152d05fd720d66`.`statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Rechazado', '4', 0, '14');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Pendiente', '1', 1, '14');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Proceso', '2', 1, '14');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Finalizado', '3', 0, '14');
+INSERT INTO `statustasks` (`name`, `posicion`, `isStateChange`, `idEnterprise`) VALUES ('Rechazado', '4', 0, '14');
+
+/*
+SET FOREIGN_KEY_CHECKS = 0; 
+TRUNCATE table $table_name; 
+SET FOREIGN_KEY_CHECKS = 1;
+*/

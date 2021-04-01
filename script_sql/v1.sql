@@ -65,18 +65,18 @@ ADD COLUMN `boss` varchar(100) DEFAULT NULL;
 delimiter //
 CREATE PROCEDURE createPlanEnterprise(IN idplans int, IN idEnterprise int, IN anio int)
 BEGIN
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '1', 'Enero', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '2', 'Febrero', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '3', 'Marzo', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '4', 'Abril', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '5', 'Mayo', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '6', 'Junio', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '7', 'Julio', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '8', 'Agosto', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '9', 'Septiembre', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '10', 'Octubre', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '11', 'Noviembre', anio, 'false');
-	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idplans, '12', 'Diciembre', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '1', 'Enero', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '2', 'Febrero', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '3', 'Marzo', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '4', 'Abril', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '5', 'Mayo', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '6', 'Junio', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '7', 'Julio', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '8', 'Agosto', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '9', 'Septiembre', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '10', 'Octubre', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '11', 'Noviembre', anio, 'false');
+	INSERT INTO `enterprisesplans` (`idplans`, `idEnterprise`, `mes`, `nombreMes`, `anio`, `pagado`) VALUES (idplans, idEnterprise, '12', 'Diciembre', anio, 'false');
 END//
 
-	
+INSERT INTO `plans` (`nombre`,`descripcion`,`precio`) VALUES ('Plan Básico','- Ingreso y administración de Tareas',100);
