@@ -8,8 +8,9 @@ export class StatustaskController {
     res.json( await new StatusTasksModule().getAllStatustask(identerprise) );
   }
   public async getStatustask( req: Request, res: Response) {
+    const identerprise: number = parseInt(req.headers.identerprise+'');
     const id: number = parseInt(req.params.id);
-    res.json( await new StatusTasksModule().getStatustask(id) );
+    res.json( await new StatusTasksModule().getStatustask(identerprise, id) );
   }
   public async updateStatustask( req: Request, res: Response) {
     const statustask: StatusTasksModels = req.body;

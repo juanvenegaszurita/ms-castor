@@ -41,6 +41,7 @@ export class IndexBD {
     Tasks.hasMany( HistoryTasks, {foreignKey: 'idTask'} )
 
     StatusTasks.hasOne( Enterprise, {foreignKey: 'idEnterprise'});
+    StatusTasks.hasMany( Tasks, {foreignKey: 'idStatus'});
 
     Transbank.hasOne( Enterprise, {foreignKey: 'idEnterprise'});
     Transbank.belongsTo( Enterprise, {foreignKey: 'idEnterprise'});
