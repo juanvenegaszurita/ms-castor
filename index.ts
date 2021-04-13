@@ -16,7 +16,16 @@ class Server {
     try {
       const firebaseConfig = environment.FIREBASE_CASTOR;
       console.log("firebaseConfig", firebaseConfig);
-      const firebaseConfigJSOn = JSON.parse(firebaseConfig.replace(/^\ufeff/g,""));
+      firebaseConfig.replace(/\\n/g, "\\n")  
+               .replace(/\\'/g, "\\'")
+               .replace(/\\"/g, '\\"')
+               .replace(/\\&/g, "\\&")
+               .replace(/\\r/g, "\\r")
+               .replace(/\\t/g, "\\t")
+               .replace(/\\b/g, "\\b")
+               .replace(/\\f/g, "\\f");
+      firebaseConfig.replace(/[\u0000-\u0019]+/g,"");
+      const firebaseConfigJSOn = JSON.parse(firebaseConfig);
       console.log("firebaseConfigJSOn", firebaseConfigJSOn)
       initializeApp(firebaseConfigJSOn);
       console.log("Firebase OK");
