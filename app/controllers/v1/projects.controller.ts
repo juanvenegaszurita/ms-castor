@@ -1,16 +1,17 @@
 import { Request, Response } from 'express';
 import { ProjectsModels } from '../../@models/projects.model';
 import { ProjectsModule } from '../../modules/v1/projects.module';
+import { HeadersModel } from '../../@models/headers.model';
 
 export class ProjectsController {
   public async getAllProject( req: Request, res: Response) {
-    const identerprise: number = parseInt(req.headers.identerprise+'');
-    res.json( await new ProjectsModule().getAllProject(identerprise) );
+    const headers = res.locals as HeadersModel;
+    res.json( await new ProjectsModule().getAllProject(headers.idEnterprise) );
   }
   public async getProject( req: Request, res: Response) {
-    const identerprise: number = parseInt(req.headers.identerprise+'');
+    const headers = res.locals as HeadersModel;
     const id: number = parseInt(req.params.id);
-    res.json( await new ProjectsModule().getProject(identerprise, id) );
+    res.json( await new ProjectsModule().getProject(headers.idEnterprise, id) );
   }
   public async updateProject( req: Request, res: Response) {
     const project: ProjectsModels = req.body;
