@@ -16,7 +16,9 @@ class Server {
     try {
       const firebaseConfig = environment.FIREBASE_CASTOR;
       console.log("firebaseConfig", firebaseConfig);
-      initializeApp(JSON.parse(firebaseConfig));
+      const firebaseConfigJSOn = JSON.parse(firebaseConfig);
+      console.log("firebaseConfigJSOn", firebaseConfigJSOn)
+      initializeApp(firebaseConfigJSOn);
       console.log("Firebase OK");
     } catch (error) {
       console.log("Firebase ERROR", error);
