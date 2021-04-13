@@ -16,7 +16,7 @@ class Server {
     try {
       const firebaseConfig = environment.FIREBASE_CASTOR;
       console.log("firebaseConfig", firebaseConfig);
-      const firebaseConfigJSOn = JSON.parse(firebaseConfig);
+      const firebaseConfigJSOn = JSON.parse(firebaseConfig.replace(/^\ufeff/g,""));
       console.log("firebaseConfigJSOn", firebaseConfigJSOn)
       initializeApp(firebaseConfigJSOn);
       console.log("Firebase OK");
