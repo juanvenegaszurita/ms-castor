@@ -14,7 +14,9 @@ class Server {
   }
   private firebaseAdmin() {
     try {
-      initializeApp(JSON.parse(environment.FIREBASE_CASTOR));
+      const firebaseConfig = JSON.parse(environment.FIREBASE_CASTOR);
+      console.log("firebaseConfig", firebaseConfig);
+      initializeApp(firebaseConfig);
       console.log("Firebase OK");
     } catch (error) {
       console.log("Firebase ERROR", error);
