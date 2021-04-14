@@ -29,6 +29,7 @@ export class IndexBD {
     User.hasMany( Tasks, {foreignKey: 'assignedUser'});
     
     UserEnterprise.belongsTo( User, {foreignKey: 'boss', as: 'userBoss'} );
+    UserEnterprise.belongsTo( User, {foreignKey: 'UID', as: 'user'} );
 
     Project.hasOne( Enterprise, {foreignKey: 'idEnterprise'});
     Project.hasMany( Tasks, { foreignKey: 'idProject' });

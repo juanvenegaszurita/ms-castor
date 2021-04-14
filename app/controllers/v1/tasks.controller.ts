@@ -16,17 +16,17 @@ export class TasksController {
   public async updateTask( req: Request, res: Response) {
     const headers = res.locals as HeadersModel;
     const task: TasksModels = req.body;
-    res.json( await new TasksModule().updateTask(headers.UID, task) );
+    res.json( await new TasksModule().updateTask(headers.UID, headers.idEnterprise, task) );
   }
   public async deleteTask( req: Request, res: Response) {
     const headers = res.locals as HeadersModel;
     const id: number = parseInt(req.params.id);
-    res.json( await new TasksModule().deleteTask(headers.UID, id) );
+    res.json( await new TasksModule().deleteTask(headers.UID, headers.idEnterprise, id) );
   }
   public async createTask( req: Request, res: Response) {
     const headers = res.locals as HeadersModel;
     const task: TasksModels = req.body;
-    res.json( await new TasksModule().createTask(headers.UID, task) );
+    res.json( await new TasksModule().createTask(headers.UID, headers.idEnterprise, task) );
   }
   public async statusTasks( req: Request, res: Response) {
     const headers = res.locals as HeadersModel;

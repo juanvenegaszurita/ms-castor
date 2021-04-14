@@ -3,6 +3,7 @@ import { App } from './app/app';
 import { IndexBD } from './app/bd/index.db';
 import { initializeApp, credential } from 'firebase-admin';
 import { environment } from './environments/environment';
+import { writeFileSync, statSync } from 'fs';
 
 class Server {
   app: express.Application = express();
@@ -13,8 +14,21 @@ class Server {
     this.createServer();
   }
   private firebaseAdmin() {
+    const pathFB = __dirname+"/"+environment.PATH_FIREBASE_CASTOR;
+    
     try {
-      initializeApp(JSON.parse( environment.FIREBASE_CASTOR ));
+      const stats = statSync(pathFB);
+      if( !stats.isFile() )
+          writeFileSync(pathFB, environment.FIREBASE_CASTOR);
+    } catch (error) {
+      writeFileSync(pathFB, environment.FIREBASE_CASTOR);
+    }
+
+    try {
+      const serviceAccount = require(pathFB);
+      initializeApp({
+        credential: credential.cert(serviceAccount)
+      });
       console.log("Firebase OK");
     } catch (error) {
       console.log("Firebase ERROR", error);
