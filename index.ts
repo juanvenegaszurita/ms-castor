@@ -4,6 +4,7 @@ import { IndexBD } from './app/bd/index.db';
 import { initializeApp, credential } from 'firebase-admin';
 import { environment } from './environments/environment';
 import { writeFileSync, statSync } from 'fs';
+import { ScheduledTasksModule } from './app/modules/v1/scheduled-tasks.module';
 
 class Server {
   app: express.Application = express();
@@ -12,6 +13,7 @@ class Server {
     IndexBD.init();
     this.firebaseAdmin();
     this.createServer();
+    new ScheduledTasksModule().birthdays("create").then(e => console.log("birthdays OK", e)).catch(e => console.log("birthdays Error", e));
   }
   private firebaseAdmin() {
     const pathFB = __dirname+"/"+environment.PATH_FIREBASE_CASTOR;

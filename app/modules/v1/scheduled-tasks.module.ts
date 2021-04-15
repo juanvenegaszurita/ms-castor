@@ -30,7 +30,7 @@ export class ScheduledTasksModule {
         this.logs("ini", "Se crea Jobs Cumpleaño");
         cumpleano = schedule(environment.CRON_EXPRESSION_BIRTHDAYS, async ()=> await this.createBirthdays(), {timezone: 'America/Santiago'} );
         this.logs("fin");
-      } {
+      } else {
         return { payload: "La tarea no se encuenra creada", message: '', code: "400"};
       }
     }
@@ -56,10 +56,12 @@ export class ScheduledTasksModule {
         const user = userEnterprise.getDataValue("user") as User;
         FirebaseService.insertNotifications(`${environment.MSN_NOTIF_BIRTHDAYS} ${user.getDataValue("nombre")}`, userEnterprise.getDataValue("idEnterprise"), TypeNotifications.BIRTHDAYS);
       });
-      return birthdays;
+      
+      this.logs("fin");
     } catch (error) {
       console.log("error createBirthdays", error);
+      
+      this.logs("fin");
     }
-    this.logs("fin");
   }
 }
