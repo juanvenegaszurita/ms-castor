@@ -28,7 +28,7 @@ export class ScheduledTasksModule {
     } else {
       if( status === 'create' ) {
         this.logs("ini", "Se crea Jobs Cumpleaño");
-        cumpleano = schedule(environment.CRON_EXPRESSION_BIRTHDAYS, async ()=> await this.createBirthdays() );
+        cumpleano = schedule(environment.CRON_EXPRESSION_BIRTHDAYS, async ()=> await this.createBirthdays(), {timezone: 'America/Santiago'} );
         this.logs("fin");
       } {
         return { payload: "La tarea no se encuenra creada", message: '', code: "400"};
@@ -50,6 +50,7 @@ export class ScheduledTasksModule {
   }
   private async createBirthdays() {
     try {
+      this.logs("ini", "createBirthdays");
       const birthdays = await UserEnterprise.birthdays();
       birthdays.forEach( userEnterprise => {
         const user = userEnterprise.getDataValue("user") as User;
@@ -59,5 +60,6 @@ export class ScheduledTasksModule {
     } catch (error) {
       console.log("error createBirthdays", error);
     }
+    this.logs("fin");
   }
 }
