@@ -10,6 +10,7 @@ export class MailerModule {
       await this.mailerService.sendEmail(data)
       return { payload: data, message: 'Email Enviado', code: 200};
     } catch (error) {
+      console.log("sendSimpleMail", error);
       return { payload: error.name, message: 'Error al enviar Email', code: 400};
     }
   }
