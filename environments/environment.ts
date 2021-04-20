@@ -20,4 +20,7 @@ export const environment = {
   MSN_NOTIF_BIRTHDAYS: `${process.env.MSN_NOTIF_BIRTHDAYS}`,
 
   CRON_EXPRESSION_BIRTHDAYS: `${process.env.CRON_EXPRESSION_BIRTHDAYS}`,
+  
+  MAILER_USER: `${process.env.MAILER_USER}`,
+  MAILER_PASS: `${process.env.MAILER_PASS}`,
 };
